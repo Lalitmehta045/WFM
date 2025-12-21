@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { softServices } from "@/data/servicesData";
+import { softServices, hardServices } from "@/data/servicesData";
 
-const services = softServices.slice(0, 6);
+const services = [...softServices.slice(0, 5), hardServices.find(s => s.id === "glass-facade-maintenance")].filter(Boolean);
 
 const ExpertiseServices: React.FC = () => {
   const navigate = useNavigate();
@@ -37,14 +37,27 @@ const ExpertiseServices: React.FC = () => {
                 <div className="absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:rotateY(180deg)] [-webkit-transform:rotateY(180deg)] shadow-lg bg-[#550000] flex items-center justify-center p-4 sm:p-6">
                   <div className="text-center flex flex-col justify-between h-full">
                     <div>
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-4 px-2">{service.title}</h3>
-                      <p className="text-white text-xs sm:text-sm md:text-base leading-relaxed px-2 mb-4 sm:mb-6">{service.shortDescription}</p>
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3 px-2">{service.title}</h3>
+                      <p className="text-white text-xs sm:text-sm leading-relaxed px-2 mb-3 sm:mb-4">{service.shortDescription}</p>
+                      {service.features && (
+                        <div className="mb-2 sm:mb-3">
+                          <p className="text-white/90 text-xs font-semibold mb-1">Key Features:</p>
+                          <ul className="text-white/80 text-xs space-y-1 px-2">
+                            {service.features.slice(0, 2).map((feature, idx) => (
+                              <li key={idx} className="flex items-center justify-center">
+                                <span className="w-1 h-1 bg-white rounded-full mr-2"></span>
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                     <button
                       onClick={() => navigate(`/service/${service.id}`)}
-                      className="inline-flex items-center px-4 py-2 bg-white text-[#550000] rounded-lg hover:bg-accent transition-all duration-200 text-sm font-medium mx-auto"
+                      className="inline-flex items-center px-4 py-2 bg-white text-[#550000] rounded-lg hover:bg-accent transition-all duration-200 text-sm font-medium mx-auto shadow-md hover:shadow-lg"
                     >
-                      Know More <ArrowRight className="ml-1 h-4 w-4" />
+                      View Details <ArrowRight className="ml-1 h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -57,7 +70,7 @@ const ExpertiseServices: React.FC = () => {
         <div className="text-center mt-12">
           <button
             onClick={() => navigate("/services")}
-            className="inline-flex items-center px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors duration-200 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center px-8 py-3 bg-[#550000] text-white font-medium rounded-lg hover:bg-[#550000]/90 transition-colors duration-200 shadow-lg hover:shadow-xl"
           >
             More Services
             <ArrowRight className="ml-2 h-4 w-4" />

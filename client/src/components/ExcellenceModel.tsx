@@ -17,10 +17,8 @@ const excellence = [
 ];
 
 const OperationalExcellence = () => {
-  const [sectionRef, isVisible] = useScrollAnimation();
-
   return (
-    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 bg-background">
+    <section className="py-12 sm:py-16 md:py-20 bg-background">
       <div className="container mx-auto w-full overflow-x-hidden px-4 sm:px-5 md:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 px-2">
           <h2 className="font-heading font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-foreground">
@@ -32,13 +30,12 @@ const OperationalExcellence = () => {
           {excellence.map((item, index) => (
             <div
               key={index}
-              className={`flex flex-col items-center justify-center p-3 sm:p-4 md:p-6 bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 scroll-bounce-in group ${isVisible ? 'visible' : ''}`}
-              style={{ transitionDelay: `${index * 0.15}s` }}
+              className="flex flex-col items-center justify-center p-3 sm:p-4 md:p-6 bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 group"
             >
               <img 
                 src={item.icon} 
                 alt={item.label}
-                className="w-12 h-12 sm:w-16 sm:h-16 md:w-16 md:h-16 mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300"
+                className="w-12 h-12 sm:w-16 sm:h-16 md:w-16 md:h-16 mb-2 sm:mb-3 md:mb-4"
               />
               <p className="text-xs sm:text-sm font-semibold text-primary text-center px-1">{item.label}</p>
             </div>
